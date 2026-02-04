@@ -1,8 +1,6 @@
 import type { Ticket } from "../api/v1/services/ticketTypes";
 
 /**
- * Seed ticket data for the in-memory ticket store.
- * Uses fixed createdAt timestamps that match the assignment/demo contract.
  */
 
 export const tickets: Ticket[] = [
