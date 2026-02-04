@@ -151,5 +151,33 @@ describe("Ticket routes - DELETE /api/v1/tickets/:id", (): void => {
     });
 });
 
+describe("Ticket routes - GET /api/v1/tickets/:id/urgency", (): void => {
+    beforeEach((): void => {
+        TicketService.resetStore();
+    });
+
+    it("returns urgency data for an existing ticket", async (): Promise<void> => {
+        const response: Response = await request(app).get("/api/v1/tickets/1/urgency");
+
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty("message", "Ticket urgency calculated");
+        expect(response.body).toHaveProperty("data");
+
+        const data = response.body.data;
+        expect(data).toHaveProperty("id", 1);
+        expect(typeof data.ticketAge).toBe("number");
+        expect(typeof data.urgencyScore).toBe("number");
+        expect(typeof data.urgencyLevel).toBe("string");
+    });
+
+    it("returns 404 when the ticket does not exist", async (): Promise<void> => {
+        const response: Response = await request(app).get("/api/v1/tickets/999/urgency");
+
+        expect(response.status).toBe(404);
+        expect(response.body).toHaveProperty("message", "Ticket not found");
+    });
+});
+
+
 
 
