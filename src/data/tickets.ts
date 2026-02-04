@@ -1,9 +1,10 @@
 import type { Ticket } from "../api/v1/services/ticketTypes";
 
 /**
+ * Seed ticket data for the in-memory ticket store.
  */
 
-export const tickets: Ticket[] = [
+export const SEED_TICKETS: Ticket[] = [
     {
         id: 1,
         title: "Update footer copyright year",
