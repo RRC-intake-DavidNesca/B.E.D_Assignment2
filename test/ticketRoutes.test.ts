@@ -127,4 +127,29 @@ describe("Ticket routes - PUT /api/v1/tickets/:id", (): void => {
     });
 });
 
+describe("Ticket routes - DELETE /api/v1/tickets/:id", (): void => {
+    beforeEach((): void => {
+        TicketService.resetStore();
+    });
+
+    it("deletes an existing ticket and returns a success message", async (): Promise<void> => {
+        const response: Response = await request(app).delete("/api/v1/tickets/1");
+
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty("message", "Ticket deleted");
+
+        // Confirm it is actually gone
+        const getResponse: Response = await request(app).get("/api/v1/tickets/1");
+        expect(getResponse.status).toBe(404);
+    });
+
+    it("returns 404 when the ticket does not exist", async (): Promise<void> => {
+        const response: Response = await request(app).delete("/api/v1/tickets/999");
+
+        expect(response.status).toBe(404);
+        expect(response.body).toHaveProperty("message", "Ticket not found");
+    });
+});
+
+
 
