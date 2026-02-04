@@ -11,8 +11,7 @@ export interface TicketUrgency {
     urgencyLevel: string;
 }
 
-/**
- * Reference time used in the assignment demo/screenshots
+/** 
  */
 const REFERENCE_NOW: Date = new Date("2025-12-17T15:00:00.000Z");
 const MS_PER_DAY: number = 24 * 60 * 60 * 1000;
