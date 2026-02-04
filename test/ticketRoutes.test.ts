@@ -89,3 +89,42 @@ describe("Ticket routes - POST /api/v1/tickets", (): void => {
     });
 });
 
+describe("Ticket routes - PUT /api/v1/tickets/:id", (): void => {
+    beforeEach((): void => {
+        TicketService.resetStore();
+    });
+
+    it("updates ticket priority and status when values are valid", async (): Promise<void> => {
+        const response: Response = await request(app)
+            .put("/api/v1/tickets/1")
+            .send({
+                priority: "high",
+                status: "in-progress",
+            });
+
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty("message", "Ticket updated successfully");
+        expect(response.body).toHaveProperty("data");
+        expect(response.body.data).toMatchObject({
+            id: 1,
+            priority: "high",
+            status: "in-progress",
+        });
+    });
+
+    it("returns 400 when status is invalid", async (): Promise<void> => {
+        const response: Response = await request(app)
+            .put("/api/v1/tickets/1")
+            .send({
+                status: "closed", // not one of open|in-progress|resolved
+            });
+
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty(
+            "message",
+            "Invalid status. Must be one of: open, in-progress, resolved"
+        );
+    });
+});
+
+
