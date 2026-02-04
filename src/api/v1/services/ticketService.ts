@@ -36,7 +36,7 @@ function getUrgencyLevelMessage(score: number): string {
         return "Critical. Immediate attention required.";
     }
 
-    if (score >= 51) {
+    if (score >= 50) {
         return "High urgency. Prioritize resolution.";
     }
 
