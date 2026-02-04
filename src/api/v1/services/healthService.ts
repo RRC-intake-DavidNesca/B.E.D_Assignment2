@@ -1,5 +1,5 @@
 /**
- * Builds the health check payload returned by GET /api/v1/health.
+ * Service responsible for building the health check payload.
  */
 
 import packageJson from "../../../../package.json";
@@ -11,11 +11,13 @@ export interface HealthResponse {
     version: string;
 }
 
-export const getHealthInfo = (): HealthResponse => {
-    return {
-        status: "OK",
-        uptime: process.uptime(),
-        timestamp: new Date().toISOString(),
-        version: packageJson.version,
-    };
-};
+export class HealthService {
+    public static getHealthStatus(): HealthResponse {
+        return {
+            status: "OK",
+            uptime: process.uptime(),
+            timestamp: new Date().toISOString(),
+            version: packageJson.version,
+        };
+    }
+}

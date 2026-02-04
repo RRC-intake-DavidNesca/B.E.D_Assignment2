@@ -1,5 +1,4 @@
 /**
- * Version 1 API router container. Mounts feature routers under /api/v1.
  */
 
 import { Router } from "express";
