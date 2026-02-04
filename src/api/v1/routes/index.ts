@@ -1,10 +1,12 @@
-import { Request, Response, Router } from "express";
-import { HTTP_STATUS } from "../../../constants/httpConstants";
+/**
+ * Version 1 API router container. Mounts feature routers under /api/v1.
+ */
+
+import { Router } from "express";
+import healthRouter from "./healthRoutes";
 
 const v1Router: Router = Router();
 
-v1Router.get("/health", (_req: Request, res: Response): void => {
-    res.status(HTTP_STATUS.OK).json({ status: "ok" });
-});
+v1Router.use("/health", healthRouter);
 
 export default v1Router;
