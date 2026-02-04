@@ -1,13 +1,16 @@
 /**
+ * File: src/api/v1/routes/index.ts
+ * Purpose: Combines v1 routes and mounts feature routers under /api/v1.
  */
 
 import { Router } from "express";
-import healthRouter from "./healthRoutes";
-import ticketRouter from "./ticketRoutes";
 
-const v1Router: Router = Router();
+import healthRoutes from "./healthRoutes";
+import ticketRoutes from "./ticketRoutes";
 
-v1Router.use("/health", healthRouter);
-v1Router.use("/tickets", ticketRouter);
+const v1Routes: Router = Router();
 
-export default v1Router;
+v1Routes.use("/health", healthRoutes);
+v1Routes.use("/tickets", ticketRoutes);
+
+export default v1Routes;
