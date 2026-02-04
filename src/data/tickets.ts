@@ -14,14 +14,6 @@ export interface Ticket {
     createdAt: string; // ISO 8601
 }
 
-/** Returns an ISO date string for a given number of days ago at 10:00:00.000Z */
-function daysAgo(days: number): string {
-    const d: Date = new Date();
-    d.setUTCDate(d.getUTCDate() - days);
-    d.setUTCHours(10, 0, 0, 0);
-    return d.toISOString();
-}
-
 export const tickets: Ticket[] = [
     {
         id: 1,
@@ -29,7 +21,7 @@ export const tickets: Ticket[] = [
         description: "Footer still shows 2024",
         priority: "low",
         status: "open",
-        createdAt: daysAgo(3),
+        createdAt: "2025-12-14T15:00:00.000Z",
     },
     {
         id: 2,
@@ -37,7 +29,7 @@ export const tickets: Ticket[] = [
         description: "Upload takes 30+ seconds",
         priority: "medium",
         status: "open",
-        createdAt: daysAgo(2),
+        createdAt: "2025-12-15T15:00:00.000Z",
     },
     {
         id: 3,
@@ -45,7 +37,7 @@ export const tickets: Ticket[] = [
         description: "Dashboard takes 10+ seconds to load",
         priority: "medium",
         status: "open",
-        createdAt: daysAgo(6),
+        createdAt: "2025-12-11T15:00:00.000Z",
     },
     {
         id: 4,
@@ -53,7 +45,7 @@ export const tickets: Ticket[] = [
         description: "Reset emails taking over 30 minutes",
         priority: "high",
         status: "open",
-        createdAt: daysAgo(5),
+        createdAt: "2025-12-12T15:00:00.000Z",
     },
     {
         id: 5,
@@ -61,7 +53,7 @@ export const tickets: Ticket[] = [
         description: "PDF export fails silently",
         priority: "high",
         status: "open",
-        createdAt: daysAgo(9),
+        createdAt: "2025-12-08T15:00:00.000Z",
     },
     {
         id: 6,
@@ -69,7 +61,7 @@ export const tickets: Ticket[] = [
         description: "Users report blank screen on login",
         priority: "critical",
         status: "open",
-        createdAt: daysAgo(6),
+        createdAt: "2025-12-11T15:00:00.000Z",
     },
     {
         id: 7,
@@ -77,6 +69,6 @@ export const tickets: Ticket[] = [
         description: "Dark mode doesn't persist after refresh",
         priority: "medium",
         status: "resolved",
-        createdAt: daysAgo(10),
+        createdAt: "2025-12-07T15:00:00.000Z",
     },
 ];
