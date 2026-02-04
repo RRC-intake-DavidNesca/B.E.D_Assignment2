@@ -40,3 +40,52 @@ describe("Ticket routes - GET endpoints", (): void => {
     });
 });
 
+describe("Ticket routes - POST /api/v1/tickets", (): void => {
+    beforeEach((): void => {
+        TicketService.resetStore();
+    });
+
+    it("creates a ticket when required fields are valid", async (): Promise<void> => {
+        const newTicket = {
+            title: "New ticket from test",
+            description: "Created via POST /api/v1/tickets",
+            priority: "high",
+        };
+
+        const response: Response = await request(app)
+            .post("/api/v1/tickets")
+            .send(newTicket);
+
+        expect(response.status).toBe(201);
+        expect(response.body).toHaveProperty("message", "Ticket created");
+        expect(response.body).toHaveProperty("data");
+        expect(response.body.data).toMatchObject(newTicket);
+        expect(typeof response.body.data.id).toBe("number");
+        expect(typeof response.body.data.createdAt).toBe("string");
+    });
+
+    it("returns 400 when title is missing", async (): Promise<void> => {
+        const response: Response = await request(app).post("/api/v1/tickets").send({
+            description: "Missing title field",
+            priority: "high",
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("message", "Missing required field: title");
+    });
+
+    it("returns 400 when priority is invalid", async (): Promise<void> => {
+        const response: Response = await request(app).post("/api/v1/tickets").send({
+            title: "Invalid priority ticket",
+            description: "Should fail validation",
+            priority: "urgent", // not one of critical|high|medium|low
+        });
+
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty(
+            "message",
+            "Invalid priority. Must be one of: critical, high, medium, low"
+        );
+    });
+});
+
