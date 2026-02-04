@@ -1,5 +1,4 @@
 /**
- * File: src/api/v1/routes/index.ts
  * Purpose: Combines v1 routes and mounts feature routers under /api/v1.
  */
 
