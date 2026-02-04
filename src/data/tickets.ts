@@ -1,18 +1,9 @@
+import type { Ticket } from "../api/v1/services/ticketTypes";
+
 /**
- * Types and data for support tickets.
+ * Seed ticket data for the in-memory ticket store.
+ * Uses fixed createdAt timestamps that match the assignment/demo contract.
  */
-
-export type TicketPriority = "low" | "medium" | "high" | "critical";
-export type TicketStatus = "open" | "resolved";
-
-export interface Ticket {
-    id: number;
-    title: string;
-    description: string;
-    priority: TicketPriority;
-    status: TicketStatus;
-    createdAt: string; // ISO 8601
-}
 
 export const tickets: Ticket[] = [
     {

@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
-import {
-    getAllTickets,
-    getTicketUrgency,
-    TicketUrgency,
-} from "../services/ticketService";
-import { Ticket } from "../../../data/tickets";
+import { getAllTickets, getTicketUrgency, TicketUrgency } from "../services/ticketService";
+import { Ticket } from "../services/ticketTypes";
 
 export const getTickets = (_req: Request, res: Response): void => {
     const data: Ticket[] = getAllTickets();

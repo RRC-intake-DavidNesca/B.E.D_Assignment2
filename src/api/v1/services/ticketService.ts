@@ -1,4 +1,5 @@
-import { Ticket, TicketPriority, tickets } from "../../../data/tickets";
+import { tickets } from "../../../data/tickets";
+import { Ticket, TicketPriority } from "./ticketTypes";
 
 export interface TicketUrgency {
     id: number;
