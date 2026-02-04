@@ -12,8 +12,7 @@ export interface TicketUrgency {
 }
 
 /**
- * Reference time used in the assignment demo/screenshots (keeps urgency calculations stable).
- * The sample `createdAt` timestamps are based around mid-Dec 2025.
+ * Reference time used in the assignment demo/screenshots
  */
 const REFERENCE_NOW: Date = new Date("2025-12-17T15:00:00.000Z");
 const MS_PER_DAY: number = 24 * 60 * 60 * 1000;

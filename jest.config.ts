@@ -1,10 +1,3 @@
-/**
- * Jest configuration (TypeScript).
- *
- * This project is CommonJS (`package.json` has `"type": "commonjs"`).
- * We export with `export =` (CommonJS style) so Jest can `require()` this config.
- */
-
 import type { Config } from "jest";
 
 const config: Config = {
@@ -15,4 +8,3 @@ const config: Config = {
 };
 
 export = config;
-
