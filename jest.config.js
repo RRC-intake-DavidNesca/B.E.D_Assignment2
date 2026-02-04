@@ -1,14 +1,10 @@
 /**
- * Purpose: Jest configuration for TypeScript tests using ts-jest.
+ * Jest configuration for TypeScript tests using ts-jest.
  */
 
-import type { Config } from "jest";
-
-const config: Config = {
+module.exports = {
     preset: "ts-jest",
     testEnvironment: "node",
     testMatch: ["**/*.test.ts"],
     collectCoverageFrom: ["src/**/*.ts", "!src/server.ts", "!src/types/**/*.ts"],
 };
-
-export default config;
