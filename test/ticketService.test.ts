@@ -1,13 +1,9 @@
-/**
- * Unit tests for TicketService urgency calculation.
- */
-
-import { TicketService } from "../src/api/v1/services/ticketService";
+import { calculateTicketUrgency } from "../src/api/v1/services/ticketService";
 import type { Ticket, TicketPriority } from "../src/api/v1/services/ticketTypes";
 
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
-describe("TicketService.calculateTicketUrgency", (): void => {
+describe("calculateTicketUrgency", (): void => {
     const fixedNow: number = new Date("2025-01-15T10:00:00.000Z").getTime();
     let nowSpy: jest.SpyInstance<number, []>;
 
@@ -36,30 +32,23 @@ describe("TicketService.calculateTicketUrgency", (): void => {
 
     it("returns base score and low urgency for a new low-priority ticket", (): void => {
         const ticket: Ticket = makeTicket("low", "open", 0);
-
-        const result = TicketService.calculateTicketUrgency(ticket);
-
+        const result = calculateTicketUrgency(ticket);
         expect(result.ticketAge).toBe(0);
-        expect(result.urgencyScore).toBe(10); // base 10, no age yet
+        expect(result.urgencyScore).toBe(10);
         expect(result.urgencyLevel).toBe("Low urgency. Address when capacity allows.");
     });
 
     it("increases urgency score with ticket age and priority", (): void => {
-        const ticket: Ticket = makeTicket("medium", "open", 4); // age 4 days
-
-        const result = TicketService.calculateTicketUrgency(ticket);
-
-        // base 20 + 4 * 5 = 40
+        const ticket: Ticket = makeTicket("medium", "open", 4);
+        const result = calculateTicketUrgency(ticket);
         expect(result.ticketAge).toBe(4);
         expect(result.urgencyScore).toBe(40);
         expect(result.urgencyLevel).toBe("Moderate. Schedule for attention.");
     });
 
     it("returns critical urgency for high score tickets", (): void => {
-        const ticket: Ticket = makeTicket("critical", "open", 7); // 50 + 7 * 5 = 85
-
-        const result = TicketService.calculateTicketUrgency(ticket);
-
+        const ticket: Ticket = makeTicket("critical", "open", 7);
+        const result = calculateTicketUrgency(ticket);
         expect(result.ticketAge).toBe(7);
         expect(result.urgencyScore).toBe(85);
         expect(result.urgencyLevel).toBe("Critical. Immediate attention required.");
@@ -67,12 +56,9 @@ describe("TicketService.calculateTicketUrgency", (): void => {
 
     it("returns zero score and minimal urgency for resolved tickets", (): void => {
         const ticket: Ticket = makeTicket("high", "resolved", 10);
-
-        const result = TicketService.calculateTicketUrgency(ticket);
-
+        const result = calculateTicketUrgency(ticket);
         expect(result.ticketAge).toBe(10);
         expect(result.urgencyScore).toBe(0);
         expect(result.urgencyLevel).toBe("Minimal. Ticket resolved.");
     });
 });
-

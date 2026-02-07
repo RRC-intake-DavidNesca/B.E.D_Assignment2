@@ -1,7 +1,3 @@
-/**
- * Service responsible for building the health check payload.
- */
-
 import packageJson from "../../../../package.json";
 
 export interface HealthResponse {
@@ -11,13 +7,11 @@ export interface HealthResponse {
     version: string;
 }
 
-export class HealthService {
-    public static getHealthStatus(): HealthResponse {
-        return {
-            status: "OK",
-            uptime: process.uptime(),
-            timestamp: new Date().toISOString(),
-            version: packageJson.version,
-        };
-    }
+export function getHealthStatus(): HealthResponse {
+    return {
+        status: "OK",
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString(),
+        version: packageJson.version,
+    };
 }

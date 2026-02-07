@@ -5,12 +5,12 @@
 import request, { type Response } from "supertest";
 
 import app from "../src/app";
-import { TicketService } from "../src/api/v1/services/ticketService";
+import { resetStore } from "../src/api/v1/services/ticketService";
 
 describe("Ticket routes - GET endpoints", (): void => {
     beforeEach((): void => {
         // Ensure each test starts from the same in-memory ticket data.
-        TicketService.resetStore();
+        resetStore();
     });
 
     it("GET /api/v1/tickets returns all tickets with count and data", async (): Promise<void> => {
@@ -42,7 +42,7 @@ describe("Ticket routes - GET endpoints", (): void => {
 
 describe("Ticket routes - POST /api/v1/tickets", (): void => {
     beforeEach((): void => {
-        TicketService.resetStore();
+        resetStore();
     });
 
     it("creates a ticket when required fields are valid", async (): Promise<void> => {
@@ -91,7 +91,7 @@ describe("Ticket routes - POST /api/v1/tickets", (): void => {
 
 describe("Ticket routes - PUT /api/v1/tickets/:id", (): void => {
     beforeEach((): void => {
-        TicketService.resetStore();
+        resetStore();
     });
 
     it("updates ticket priority and status when values are valid", async (): Promise<void> => {
@@ -129,7 +129,7 @@ describe("Ticket routes - PUT /api/v1/tickets/:id", (): void => {
 
 describe("Ticket routes - DELETE /api/v1/tickets/:id", (): void => {
     beforeEach((): void => {
-        TicketService.resetStore();
+        resetStore();
     });
 
     it("deletes an existing ticket and returns a success message", async (): Promise<void> => {
@@ -153,7 +153,7 @@ describe("Ticket routes - DELETE /api/v1/tickets/:id", (): void => {
 
 describe("Ticket routes - GET /api/v1/tickets/:id/urgency", (): void => {
     beforeEach((): void => {
-        TicketService.resetStore();
+        resetStore();
     });
 
     it("returns urgency data for an existing ticket", async (): Promise<void> => {
