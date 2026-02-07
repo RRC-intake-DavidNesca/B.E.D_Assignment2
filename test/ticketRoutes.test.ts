@@ -1,7 +1,3 @@
-/**
- * Integration tests for ticket routes under /api/v1/tickets.
- */
-
 import request, { type Response } from "supertest";
 
 import app from "../src/app";
@@ -9,7 +5,6 @@ import { resetStore } from "../src/api/v1/services/ticketService";
 
 describe("Ticket routes - GET endpoints", (): void => {
     beforeEach((): void => {
-        // Ensure each test starts from the same in-memory ticket data.
         resetStore();
     });
 
@@ -78,7 +73,7 @@ describe("Ticket routes - POST /api/v1/tickets", (): void => {
         const response: Response = await request(app).post("/api/v1/tickets").send({
             title: "Invalid priority ticket",
             description: "Should fail validation",
-            priority: "urgent", // not one of critical|high|medium|low
+            priority: "urgent",
         });
 
         expect(response.status).toBe(400);
@@ -116,7 +111,7 @@ describe("Ticket routes - PUT /api/v1/tickets/:id", (): void => {
         const response: Response = await request(app)
             .put("/api/v1/tickets/1")
             .send({
-                status: "closed", // not one of open|in-progress|resolved
+                status: "closed",
             });
 
         expect(response.status).toBe(400);
@@ -138,7 +133,6 @@ describe("Ticket routes - DELETE /api/v1/tickets/:id", (): void => {
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty("message", "Ticket deleted");
 
-        // Confirm it is actually gone
         const getResponse: Response = await request(app).get("/api/v1/tickets/1");
         expect(getResponse.status).toBe(404);
     });
@@ -177,7 +171,3 @@ describe("Ticket routes - GET /api/v1/tickets/:id/urgency", (): void => {
         expect(response.body).toHaveProperty("message", "Ticket not found");
     });
 });
-
-
-
-
