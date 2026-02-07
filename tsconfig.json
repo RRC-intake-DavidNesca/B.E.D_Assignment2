@@ -19,6 +19,6 @@
             "*": ["*"]
         }
     },
-    "include": ["src/**/*", "test/**/*", "config/**/*"],
+    "include": ["src/**/*", "test/**/*", "config/**/*", "jest.config.ts"],
     "exclude": ["node_modules", "dist"]
 }
